@@ -1,0 +1,12 @@
+<div class="navbar">
+    <figure class="image">
+        <img src="assets/main-logo.png" alt="">
+    </figure>
+
+    @if(authService.isLoggedIn()){
+        <div class="user">
+            <p-menu #menu [model]="items" [popup]="true" />
+            <p-button icon="pi pi-user" [rounded]="true" size="large" (onClick)="menu.toggle($event)" severity="secondary" />
+        </div>
+    }
+</div>

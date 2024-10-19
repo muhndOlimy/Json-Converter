@@ -1,0 +1,24 @@
+<div class="filter">
+
+    <!-- Dynamic form fields -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="fields-wrapper">
+            @for(controlName of form.controls | keyvalue; track controlName){
+                <div class="field">
+                    <label [for]="controlName.key">{{ controlName.key | titlecase }}</label>
+                    <input pInputText [formControlName]="controlName.key" [id]="controlName.key" />
+                    @if(form.get(controlName.key)?.errors?.['pattern']){<small class="error">Invalid Filter</small>}
+                </div>
+            }
+    
+            <p-button (onClick)="menu.toggle($event)" styleClass="add-btn" icon="pi pi-plus" severity="secondary"/>
+            <p-menu #menu [model]="items" [popup]="true" />
+        </div>
+
+        <button class="reset-btn btn" type="action" (click)="clearFilter()">Clear All</button>
+        <button class="submit-btn btn" type="submit" [disabled]="form.untouched">Search</button>
+    </form>
+
+
+</div>

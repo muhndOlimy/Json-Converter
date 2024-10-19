@@ -1,27 +1,86 @@
-# JsonConverter
+# JSON-Converter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+## Overview
+This is JSON Re-presentaion platform allows users to convert JSON to data-table and be able to paginate, filter, providing a convenient displaying experience.
 
-## Development server
+## Up & Going
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#### install node modules
+```
+npm i
+```
+#### run the app in dev mode
+```
+ng s
+```
+## Authentication approach
+Given the absence of an authentication API, I opted for a local storage approach to manage user credentials. I also utilized the ‘Forgot Password’ feature to display the list of existing users, allowing them to authenticate.
 
-## Code scaffolding
+I didn’t find many design options to differentiate screens based on user roles. However, I created a getter in the authentication service that effectively handles role identification and ensures the correct interface is displayed for each user.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Validation approach
+I opted for the FormBuilder approach with custom validators due to the simplicity of the project. However, when dealing with larger datasets, a more efficient solution would be to employ a Web Worker. This involves sending a message containing the JSON data for validation, allowing the Web Worker to handle the intensive processing. The main thread can then listen for messages from the worker, ensuring optimal performance.
 
-## Build
+## File & structure
+Pages: Contains all component that get routed (views) and have postfix -page.component.ts to extingush them from buildup components
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Components:contains all build components for the pages components.
 
-## Running unit tests
+Interfaces: Contains all interfaces for the app
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Services: Contains all fetching services for the app.
 
-## Running end-to-end tests
+And contains other folder like: pipes, guards, etc...
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+├── app
+│   ├── app.component.ts
+│   ├── app.config.ts
+│   ├── app.routes.ts
+│   ├── components
+│   │   ├── data-table
+│   │   │   ├── data-table.component.html
+│   │   │   ├── data-table.component.scss
+│   │   │   └── data-table.component.ts
+│   │   ├── filter
+│   │   │   ├── filter.component.html
+│   │   │   ├── filter.component.scss
+│   │   │   └── filter.component.ts
+│   │   ├── json-textarea
+│   │   │   ├── json-textarea.component.html
+│   │   │   ├── json-textarea.component.scss
+│   │   │   └── json-textarea.component.ts
+│   │   └── navbar
+│   │       ├── navbar.component.html
+│   │       ├── navbar.component.scss
+│   │       └── navbar.component.ts
+│   ├── guards
+│   │   └── auth.guard.ts
+│   ├── helpers
+│   │   └── extractKeysForTable.ts
+│   ├── interfaces
+│   │   └── common.ts
+│   ├── pages
+│   │   ├── login-page
+│   │   │   ├── login-page.component.html
+│   │   │   ├── login-page.component.scss
+│   │   │   └── login-page.component.ts
+│   │   └── main-page
+│   │       ├── main-page.component.html
+│   │       ├── main-page.component.scss
+│   │       └── main-page.component.ts
+│   ├── pipes
+│   │   └── filter-by-fields.pipe.ts
+│   ├── services
+│   │   ├── JsonState.service.ts
+│   │   └── authentication.service.ts
+│   └── validators
+│       └── jsonArrayValidator.ts
+├── index.html
+├── main.ts
+└── styles.scss
+```
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# Management state
+I choosed signals in a shared service to manage the application’s state, as its simplicity negates the need for a more complex solution. Additionally, this approach ensures optimal performance.

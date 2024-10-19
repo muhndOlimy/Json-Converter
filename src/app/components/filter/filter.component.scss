@@ -1,0 +1,79 @@
+:host{
+    .filter{
+
+        .fields-wrapper{
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-end;
+
+            .field{
+                flex-basis: 200px;
+                label{
+                    color: #8C8C8C;
+                    font-size: 18px;
+                    font-weight: 500;
+                    display: block;
+                    margin-bottom: 10px;
+                }
+    
+                input{
+                    border: 1px solid #E3E3E3;
+                    border-radius: 8px;
+                    height: 40px;
+                    width: 100%;
+                }
+            }
+
+        }
+
+        .btn{
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 8px;
+            height: 40px;
+            width: 200px;
+            margin: 10px 0;
+            margin-inline-end: 10px;
+
+            &.submit-btn{
+                background-color: #5350EE;
+                color: #FFFFFF;
+                border: none;
+            }
+
+            &.reset-btn{
+                background-color: #FFFFFF;
+                border: 1px solid #777777;
+                color: #777777;
+            }
+        }
+    }
+
+    ::ng-deep .add-btn{
+        background-color: #5350EE;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    :host{
+        .filter{
+    
+            .fields-wrapper{
+    
+                .field{
+                    label{
+                        margin-bottom: 5px;
+                    }
+                }
+    
+            }
+    
+            .btn{
+                width: 150px;
+                margin: 10px 0;
+                margin-inline-end: 10px;
+            }
+        }
+    }
+}

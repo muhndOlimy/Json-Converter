@@ -1,0 +1,10 @@
+<form [formGroup]="jsonForm">
+    <textarea id="jsonInput" class="textarea" formControlName="jsonInput" rows="15" [autoResize]="true" pInputTextarea></textarea>
+
+    <!-- Display error message if JSON is invalid -->
+    @if (jsonForm.get('jsonInput')?.invalid && jsonForm.get('jsonInput')?.touched) {
+        @if(jsonForm.get('jsonInput')?.errors?.['required']){<span>JSON input is required.</span>}
+        @if(jsonForm.get('jsonInput')?.errors?.['jsonInvalid']){<span>{{ jsonForm.get('jsonInput')?.errors?.['jsonInvalid'] }}</span>}
+    }
+
+</form>

@@ -1,0 +1,33 @@
+:host{
+    .data-table{
+
+        .no-data-found{
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px 5px;
+            border-radius: 8px;
+            border: 1px solid #64748b;
+            color: #64748b;
+        }
+    }
+
+    ::ng-deep .paginator{
+        background-color: transparent;
+        justify-content: flex-start;
+        padding: 10px 0;
+        
+
+        .p-paginator-element{
+            border-radius: 5px;
+            color: #5350EE;
+            border: 1px solid #5350EE;
+            background-color: #ffffff;
+        }
+
+        .p-paginator-page.p-highlight{
+            background-color: #5350EE;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+        }
+    }
+}

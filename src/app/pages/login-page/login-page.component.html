@@ -1,0 +1,93 @@
+<div class="login-page">
+
+    <div class="form-wrapper">
+        <figure class="logo">
+            <img src="assets/login-logo.png" alt="Login Logo Name Logo">
+        </figure>
+
+        <h3 class="title">Login</h3>
+
+        <form class="form" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+
+            <div class="field">
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-envelope" />
+                    <input pInputText type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    ngModel
+                    placeholder="Email"
+                    #emailField="ngModel"
+                    required
+                    email
+                    />
+                </p-iconField>
+            </div>
+            <!-- Email Validation Messages -->
+            @if(emailField.invalid && emailField.touched){ 
+                <div class="text-danger">
+                    @if(emailField.errors?.['required']){<small>Email is required.</small>}
+                    @if(emailField.errors?.['email']){<small>Invalid email format.</small>}
+                </div>
+            }
+
+            <div class="field">
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-lock" />
+                    <input pInputText 
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    class="form-control"
+                    ngModel
+                    #passwordField="ngModel"
+                    required
+                    minlength="6"
+                    />
+                </p-iconField>
+            </div>
+            <!-- Password Validation Messages -->
+            @if(passwordField.invalid && passwordField.touched){ 
+                <div class="text-danger">
+                    @if(passwordField.errors?.['required']){<small>Password is required.</small>}
+                    @if(passwordField.errors?.['minlength']){<small>Password must be at least 6 characters long.</small>}
+                </div>
+            }
+
+            <!-- Forget password  -->
+            <p class="forget-password" (click)="showDialog()">Forget Passowrd</p>
+            <p-dialog header="Forget Password (Users DB)" [modal]="true" [(visible)]="visible" [style]="{ width: '50%' }">
+                <p-table [value]="authService.getUsers()">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-user>
+                        <tr>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.password }}</td>
+                            <td>{{ user.role }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-dialog>
+            <!-- Submit Button -->
+            <button type="submit" class="button" pButton pRipple label="Login" [disabled]="loginForm.invalid"></button>
+
+            <!-- Error Message for Invalid Credentials -->
+             @if(errorMessage){
+                <div class="error-message">
+                    <p-messages 
+                    [(value)]="errorMessage" 
+                    [closable]="false" />
+                </div>
+             }
+
+        </form>
+    </div>
+</div>
